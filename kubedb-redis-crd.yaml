@@ -8,7 +8,7 @@ spec:
   version: "5.0.3-v1"
   storageType: Durable
   storage:
-    storageClassName: "thin"
+    storageClassName: "kubedb-sc"
     accessModes:
     - ReadWriteOnce
     resources:

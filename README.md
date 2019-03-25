@@ -10,14 +10,22 @@ Using KubeDB, create a Redis database cluster
 Reference: https://kubedb.com/docs/0.11.0/setup/install/#using-helm \
 Note: Requires Helm client installed and Tiller server initialized on the target Kubernetes cluster
 
+Add the KubeDB repo to Helm \
 `$ helm repo add appscode https://charts.appscode.com/stable/` \
 `$ helm repo update` \
-`$ helm search appscode/kubedb` \
-`$ helm install appscode/kubedb --name kubedb-operator --version 0.11.0 --namespace kube-system` \
-`$ kubectl get crds -l app=kubedb -w` \
-`$ helm install appscode/kubedb-catalog --name kubedb-catalog --version 0.11.0 --namespace kube-system` \
-`$ kubectl get pods --all-namespaces -l app=kubedb --watch` \
-`$ kubectl get crd -l app=kubedb`
+`$ helm search appscode/kubedb` 
+
+Instal the kubedb-operator chart to the kube-system namespace\
+`$ helm install appscode/kubedb --name kubedb-operator --version 0.11.0 --namespace kube-system`
+
+Monitor the kubedb-operator deployment status with the following command until the AVAILABLE number of pods equals 1 \
+`$ kubectl --namespace=kube-system get deployments -l "release=kubedb-operator, app=kubedb"`
+
+List the KubeDB CRDs \
+`$ kubectl get crds -l app=kubedb`
+
+Instal the kubedb-catalog chart to the kube-system namespace \
+`$ helm install appscode/kubedb-catalog --name kubedb-catalog --version 0.11.0 --namespace kube-system`
 
 ## Install the KubeDB CLI
 Reference: https://kubedb.com/docs/0.11.0/setup/install/#install-kubedb-cli
@@ -63,7 +71,7 @@ spec:
   version: "5.0.3-v1"
   storageType: Durable
   storage:
-    storageClassName: "thin"
+    storageClassName: "kubedb-sc"
     accessModes:
     - ReadWriteOnce
     resources:
