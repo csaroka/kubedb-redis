@@ -1,0 +1,23 @@
+apiVersion: kubedb.com/v1alpha1
+kind: Redis
+metadata:
+  name: redis-cluster
+  namespace: interop-kubedb
+spec:
+  name: redis-cluster
+  version: "5.0.3-v1"
+  storageType: Durable
+  storage:
+    storageClassName: "thin"
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 2Gi
+  mode: Cluster
+  cluster:
+    master: 5
+    replicas: 2
+  terminationPolicy: WipeOut
+
+  
