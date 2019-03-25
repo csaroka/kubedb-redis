@@ -83,30 +83,35 @@ spec:
     replicas: 2
   terminationPolicy: WipeOut
   ```
-  If necessary, see reference for spec definitions and options. For instance, the `terminationPolicy: WipeOut` option is used for testing convienance; other safety options such as `Pause` (default) or `DoNotTerminate` should be considered for production.  Otherwise apply the spec to the target cluster
+  If necessary, see reference for spec definitions and options. For instance, the `terminationPolicy: WipeOut` option is used for testing convienance; other safety options such as `Pause` (default) or `DoNotTerminate` should be considered for production. 
 
-  `$ kubectl apply -f kubedb-redis-crd.yaml`
+  Apply the spec to the target cluster \
+  `$ kubectl apply -f kubedb-redis-crd.yaml` 
+  
+  Monitor the Redis database cluster status until 5 masters exist, each with 2 replicas; total of 3 pods per statefulset \
+  `$ kubectl get statefulsets -n kubedb-test`
 
-### View the Redis database cluster details and supporitng Kubernetes infrastructure components
+## View the Redis database cluster details and supporitng Kubernetes infrastructure components
 
-List Redis clusters \
+List Redis clusters in the kubedb-test namespace \
 `$ kubedb get rd -n kubedb-test` \
 View Redis cluster details \
 `$ kubedb describe rd redis-cluster -n kubedb-test` \
-View Stateful Set \
-`$ kubectl get statefulset -n kubedb-test` \
-View Pesistant Volume Claims \
+View the Kubernetes StatefulSets  \
+`$ kubectl get statefulsets -n kubedb-test` \
+View the Kubernetes  Pesistant Volume Claims \
 `$ kubectl get pvc -n kubedb-test` \
-View Persistant Volumes \
+View the Kubernetes  Persistant Volumes \
 `$ kubectl get pv -n kubedb-test` \
-View Service w/ clusterIP \
+View the Kubernetes  Service w/ clusterIP \
 `$ kubectl get service -n kubedb-test`
 
-### Destroy the Redis database cluster, Kubernetes namespace, and Helm KubeDB charts
+## Destroy the Redis database cluster, Kubernetes namespace, and Helm KubeDB charts
 
 #### Delete the Redis database cluster
 Note: For crd with *terminationPolicy: WipeOut* only \
-`$ kubectl delete -n kubedb-test rd/redis-cluster`
+`$ kubectl delete -n kubedb-test rd/redis-cluster` \
+`$ kubectl delete -n kubedb-test service/kubedb`
 
 #### Delete the Kubernetes namespace
 `$ kubectl delete ns kubedb-test`
