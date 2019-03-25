@@ -13,9 +13,9 @@ Note: Requires Helm client installed and Tiller server initialized on the target
 `$ helm repo add appscode https://charts.appscode.com/stable/` \
 `$ helm repo update` \
 `$ helm search appscode/kubedb` \
-`$ helm install appscode/kubedb --name kubedb-operator --version 0.11.0 -n kube-system` \
+`$ helm install appscode/kubedb --name kubedb-operator --version 0.11.0 --namespace kube-system` \
 `$ kubectl get crds -l app=kubedb -w` \
-`$ helm install appscode/kubedb-catalog --name kubedb-catalog --version 0.11.0 -n kube-system` \
+`$ helm install appscode/kubedb-catalog --name kubedb-catalog --version 0.11.0 --namespace kube-system` \
 `$ kubectl get pods --all-namespaces -l app=kubedb --watch` \
 `$ kubectl get crd -l app=kubedb`
 
@@ -94,10 +94,15 @@ View Persistant Volumes \
 View Service w/ clusterIP \
 `$ kubectl get service -n kubedb-test`
 
-### Destroy the Redis database cluster and Kubernetes namespace
+### Destroy the Redis database cluster, Kubernetes namespace, and Helm KubeDB charts
 
-For crd with `terminationPolicy: WipeOut`
-```
-$ kubectl delete -n kubedb-test rd/redis-cluster`
-```
+#### Delete the Redis database cluster
+Note: For crd with *terminationPolicy: WipeOut* only \
+`$ kubectl delete -n kubedb-test rd/redis-cluster`
 
+#### Delete the Kubernetes namespace
+`$ kubectl delete ns kubedb-test`
+
+#### Delete the Helm KubeDB charts
+`$ helm delete kubedb-catalog --purge` \
+`$ helm delete kubedb-operator --purge`
