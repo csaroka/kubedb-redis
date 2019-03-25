@@ -103,7 +103,7 @@ View the Kubernetes  Pesistant Volume Claims \
 `$ kubectl get pvc -n kubedb-test` \
 View the Kubernetes  Persistant Volumes \
 `$ kubectl get pv -n kubedb-test` \
-View the Kubernetes  Service w/ clusterIP \
+View the Kubernetes Service \
 `$ kubectl get service -n kubedb-test`
 
 ## Destroy the Redis database cluster, Kubernetes namespace, and Helm KubeDB charts
