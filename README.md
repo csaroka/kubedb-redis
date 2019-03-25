@@ -53,7 +53,7 @@ parameters:
 
 `$ kubectl apply -f kubedb-sc.yaml`
 
-### Create a namespace and update context
+### Create a new namespace  
 `$ kubectl create ns kubedb-test` 
 
 ### Apply the spec for creating a Redis 5.0.3-v1 database cluster
