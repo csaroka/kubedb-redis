@@ -2,7 +2,7 @@ apiVersion: kubedb.com/v1alpha1
 kind: Redis
 metadata:
   name: redis-cluster
-  namespace: interop-kubedb
+  namespace: kubedb-test
 spec:
   name: redis-cluster
   version: "5.0.3-v1"
