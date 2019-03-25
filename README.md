@@ -108,14 +108,14 @@ View the Kubernetes Service \
 
 ## Destroy the Redis database cluster, Kubernetes namespace, and Helm KubeDB charts
 
-#### Delete the Redis database cluster
+Delete the Redis database cluster \
 Note: For crd with *terminationPolicy: WipeOut* only \
 `$ kubectl delete -n kubedb-test rd/redis-cluster` \
 `$ kubectl delete -n kubedb-test service/kubedb`
 
-#### Delete the Kubernetes namespace
+Delete the Kubernetes namespace \
 `$ kubectl delete ns kubedb-test`
 
-#### Delete the Helm KubeDB charts
+Delete the Helm KubeDB charts \
 `$ helm delete kubedb-catalog --purge` \
 `$ helm delete kubedb-operator --purge`
