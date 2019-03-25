@@ -18,7 +18,7 @@ Add the KubeDB repo to Helm \
 Instal the kubedb-operator chart to the kube-system namespace\
 `$ helm install appscode/kubedb --name kubedb-operator --version 0.11.0 --namespace kube-system`
 
-Monitor the kubedb-operator deployment status with the following command until the AVAILABLE number of pods equals 1 \
+Monitor the kubedb-operator deployment status with the following command until the AVAILABLE number of pods = 1 \
 `$ kubectl --namespace=kube-system get deployments -l "release=kubedb-operator, app=kubedb"`
 
 List the KubeDB CRDs \
